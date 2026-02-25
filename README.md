@@ -1,106 +1,112 @@
-# 🚀 Azure DDoS Network Protection Lab  
-### 🔐 Attack Simulation & Automatic Mitigation (AZ-500 Aligned)
-
 <p align="center">
-  <img src="screenshots/azure-ddos-architecture.png" width="85%">
+  <img src="https://img.shields.io/badge/Microsoft-Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white">
+  <img src="https://img.shields.io/badge/Security-DDoS%20Protection-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Cloud-Security-blue?style=for-the-badge">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Azure-Security-blue?style=for-the-badge&logo=microsoftazure">
-  <img src="https://img.shields.io/badge/AZ--500-Ready-green?style=for-the-badge">
-  <img src="https://img.shields.io/badge/DDoS-Network%20Protection-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/AIM-Cybersecurity%20Engineer-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/AZ--500-Exam%20Aligned-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Threat-Simulation-orange?style=for-the-badge">
 </p>
 
----
 
-## 📌 Project Summary
 
-This project demonstrates how **Azure DDoS Network Protection (Network Tier)** detects and mitigates a simulated volumetric attack against a public-facing Virtual Machine.
+# 🚀 Azure DDoS Protection Lab – Enterprise Security Implementation
 
-✔ Built secure Azure environment  
-✔ Simulated real attack traffic  
-✔ Observed automated mitigation  
-✔ Validated protection using Azure Monitor  
+> Enterprise-grade Azure DDoS mitigation architecture with real attack simulation and monitoring validation.
 
----
+<p align="center">
+  <img src="screenshots/azure-ddos-architecture.png" width="90%">
+</p>
 
-# 🏗️ Architecture Overview
-
-<details>
-<summary>🔎 Click to Expand Architecture Details</summary>
-
-### Core Components
-
-- **Virtual Network:** `vnet-northeurope`
-- **Virtual Machine:** `Victim-VM`
-- **Public IP Address**
-- **DDoS Protection Plan:** `AZ500-Lab-DDoS`
-- **Azure Monitor Metrics**
-- **Azure Cloud Shell (Attack Simulation)**
-
-### Protection Flow
-
-1. Incoming malicious traffic detected  
-2. Azure baseline traffic comparison  
-3. Automatic mitigation triggered  
-4. Malicious packets dropped at edge  
-
-</details>
 
 ---
 
-# 🛠️ Implementation Walkthrough
+# 📌 Executive Overview
+
+This lab demonstrates the design and implementation of **Azure DDoS Network Protection** to defend a public-facing virtual machine from volumetric Layer 3/4 attacks.
+
+A simulated traffic flood was generated using Azure Cloud Shell, while Azure Monitor was used to validate real-time mitigation and attack detection.
+
+### 🎯 Objective
+Design a resilient network architecture capable of:
+
+- Detecting abnormal traffic spikes
+- Automatically mitigating volumetric attacks
+- Preserving service availability
+- Providing monitoring & telemetry visibility
 
 ---
 
-## 🛡️ Step 1 — Create DDoS Protection Plan
+# 🏗️ Enterprise Architecture Design
 
-<details>
-<summary>View Configuration</summary>
+## 🔷 Architecture Components
 
-Created dedicated DDoS Protection Plan:
-
-```
-AZ500-Lab-DDoS
-```
-
-Enabled **Network Protection Tier**.
-
-📸 Screenshot:
-
-![DDoS Plan Creation](screenshots/1-ddos-plan-create.png)
-
-</details>
+| Component | Role |
+|-----------|------|
+| Virtual Network | Resource boundary |
+| DDoS Protection Plan (Network Tier) | Advanced attack mitigation |
+| Public IP | Internet-facing endpoint |
+| Virtual Machine | Target workload |
+| Azure Monitor | Detection & metrics |
+| Cloud Shell | Controlled traffic simulation |
 
 ---
 
-## 🌐 Step 2 — Enable Protection on VNet
+## 🔄 Traffic Protection Flow
 
-<details>
-<summary>View Configuration</summary>
-
-Linked protection plan to:
-
-```
-vnet-northeurope
-```
-
-All public IPs inside the VNet now protected.
-
-📸 Screenshot:
-
-![VNet DDoS Enabled](screenshots/2-vnet-ddos-enable.png)
-
-</details>
+1. Traffic enters via Public IP  
+2. Azure edge network evaluates traffic baseline  
+3. Abnormal spike detected  
+4. Automatic mitigation activated  
+5. Malicious packets dropped at edge  
 
 ---
 
-## 💣 Step 3 — Simulate DDoS Attack
+# 🛡️ Threat Model
 
-<details>
-<summary>View Attack Script</summary>
+## 🔎 Identified Threat
 
-Used Azure Cloud Shell (PowerShell):
+**Volumetric DDoS Attack (Layer 3/4)**  
+- SYN flood  
+- UDP flood  
+- High request burst  
+
+## 🎯 Attack Impact Without Protection
+
+- Service downtime  
+- Resource exhaustion  
+- Unexpected cost spikes  
+- Reputation damage  
+
+## 🛡️ Mitigation Strategy
+
+- Azure DDoS Network Protection (Adaptive tuning)  
+- Edge-level filtering  
+- Traffic scrubbing  
+- Real-time alerting  
+
+---
+
+# ⚖️ Basic vs Network Tier Comparison
+
+| Feature | Basic | Network |
+|----------|--------|---------|
+| Enabled by default | ✅ | ❌ |
+| Adaptive traffic tuning | ❌ | ✅ |
+| Telemetry & Metrics | ❌ | ✅ |
+| Attack mitigation logging | ❌ | ✅ |
+| Cost protection guarantee | ❌ | ✅ |
+| SLA | ❌ | ✅ |
+
+**Conclusion:** Network Tier provides enterprise-grade visibility and automated mitigation.
+
+---
+
+# 💣 Attack Simulation
+
+### PowerShell Traffic Script
 
 ```powershell
 while($true) {
@@ -108,112 +114,131 @@ while($true) {
 }
 ```
 
-Launched multiple background jobs to increase traffic.
+Multiple background jobs were launched to amplify request volume.
 
-📸 Screenshot:
+### Observed Results
 
-![Attack Simulation](screenshots/3-attack-simulation.png)
-
-</details>
+- Azure Monitor flagged attack state  
+- Under DDoS attack metric triggered  
+- VM began rejecting excessive traffic  
+- Timeouts confirmed mitigation  
 
 ---
 
 # 📊 Monitoring & Detection
 
-<details>
-<summary>View Azure Monitor Metrics</summary>
+Metric Used:
 
-**Metrics Configuration:**
+```
+Under DDoS attack or not
+```
 
-- Scope → Victim-VM Public IP  
-- Metric → Under DDoS attack or not  
-- Aggregation → Max  
+Aggregation:
 
-📸 Screenshot:
+```
+Max
+```
 
-![DDoS Metrics](screenshots/4-ddos-metrics.png)
-
-### Observations:
+### Evidence of Mitigation
 
 - Traffic spike detected  
-- Attack flag enabled  
-- Automatic mitigation triggered  
-
-</details>
-
----
-
-# ✅ Proof of Mitigation
-
-<details>
-<summary>View Mitigation Evidence</summary>
-
-During attack simulation:
-
-```
-Connection timed out
-```
-
-This indicates Azure dropped malicious packets before reaching VM.
-
-📸 Screenshot:
-
-![Connection Timeouts](screenshots/5-timeouts.png)
-
-</details>
+- Attack state changed to TRUE  
+- Excess traffic dropped  
+- Service remained stable  
 
 ---
 
-# 🧹 Cleanup
+# 💰 Cost Awareness & Protection
 
-<details>
-<summary>Click to Expand Cleanup Commands</summary>
+Azure DDoS Network Protection includes:
 
-Stop attack jobs:
+- Cost protection policy  
+- Scale-based mitigation  
+- Billing safeguard during attack  
+
+This prevents unexpected financial impact during large-scale attacks.
+
+---
+
+# 🔐 Security Best Practices Applied
+
+- Public IP isolated within dedicated VNet  
+- DDoS Plan linked at VNet level  
+- Monitoring enabled before simulation  
+- Cleanup performed after lab  
+- Principle of least exposure  
+
+---
+
+# 🧹 Cleanup Procedure
 
 ```powershell
 Get-Job | Stop-Job
-```
-
-Delete Resource Group:
-
-```powershell
 Remove-AzResourceGroup -Name "AZ500-Lab-RG"
 ```
 
-</details>
+Ensures cost optimization after testing.
 
 ---
 
-# 🎯 Skills Demonstrated
+# 🎓 Certification Alignment
 
-- Azure Network Security
-- DDoS Threat Simulation
-- Azure Monitor Metrics Analysis
-- Incident Validation
-- Cost-Control Cleanup
-- AZ-500 Practical Readiness
+Aligned with Microsoft Certification Objectives:
 
----
-
-# 📚 Certification Alignment
-
-✔ AZ-500: Secure Network Infrastructure  
-✔ Platform Protection Implementation  
-✔ Monitor & Respond to Security Threats  
+- AZ-500: Secure Network Infrastructure  
+- Implement Platform Protection  
+- Monitor & Respond to Security Threats  
 
 ---
 
-## 👨💻 Author
+# 🧠 Key Technical Takeaways
+
+- DDoS mitigation occurs at Azure global edge  
+- Adaptive traffic baseline is automatically learned  
+- Mitigation happens before traffic reaches VM  
+- Monitoring visibility is critical for incident response  
+
+---
+
+# 🏢 Business Impact
+
+This implementation demonstrates how enterprise cloud workloads can remain resilient under volumetric attack conditions while maintaining service continuity and cost control.
+
+---
+
+# 📈 Resume-Ready Achievements
+
+• Designed and implemented Azure DDoS Network Protection architecture  
+• Simulated volumetric attack and validated automated mitigation  
+• Configured Azure Monitor to detect live attack metrics  
+• Demonstrated secure cloud network architecture aligned with AZ-500  
+
+---
+
+## Screenshots Gallery
+
+| Step | Screenshot | Description |
+|------|------------|-------------|
+| 1    | ![DDoS Protection Plan Creation](screenshots/1-ddos-plan-create.png) | DDoS Protection Plan creation |
+| 2    | ![VNet DDoS Protection Enabled](screenshots/2-vnet-ddos-enable.png) | VNet association with DDoS plan |
+| 3    | ![Attack Simulation in Cloud Shell](screenshots/3-attack-simulation.png) | PowerShell flood simulation |
+| 4    | ![Metrics – Attack Detected & Mitigated](screenshots/4-ddos-metrics.png) | Attack detection & mitigation metrics |
+| 5    | ![Connection Timeouts During Attack](screenshots/5-timeouts.png) | Connection timed out evidence |
+
+---
+
+## 👨‍💻 Author
 
 **Amal U. Basnayake**  
-Cloud Security Engineer | Azure | AZ-500 Focused  
+Cloud Security | Azure Security | AZ-500 Focused  
+
 
 🔗 GitHub: https://github.com/AmalUBasnayake  
-🔗 LinkedIn: https://www.linkedin.com/in/amal-udayanga-basnayake/  
+🔗 LinkedIn: https://linkedin.com/in/amal-udayanga-basnayake
+🔗 Medium: https://medium.com/@amalubasnayake
 
 ---
 
 <p align="center">
-⭐ If you found this project useful, consider giving it a star!
+⭐ If you found this project useful, give it a star!
 </p>
